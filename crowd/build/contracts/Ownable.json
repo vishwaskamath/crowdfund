@@ -577,7 +577,7 @@
   "sourceMap": "68:867:1:-:0;;;255:54;;;;;;;;;;291:10;280:8;;:21;;;;;;;;;;;;;;;;;;68:867;;;;;;",
   "deployedSourceMap": "68:867:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;386:83;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;836:96;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;386:83;426:7;453:8;;;;;;;;;;;446:15;;386:83;:::o;836:96::-;878:4;916:8;;;;;;;;;;;902:22;;:10;:22;;;895:29;;836:96;:::o;7:126:2:-;44:7;84:42;77:5;73:54;62:65;;7:126;;;:::o;139:96::-;176:7;205:24;223:5;205:24;:::i;:::-;194:35;;139:96;;;:::o;241:118::-;328:24;346:5;328:24;:::i;:::-;323:3;316:37;241:118;;:::o;365:222::-;458:4;496:2;485:9;481:18;473:26;;509:71;577:1;566:9;562:17;553:6;509:71;:::i;:::-;365:222;;;;:::o;593:90::-;627:7;670:5;663:13;656:21;645:32;;593:90;;;:::o;689:109::-;770:21;785:5;770:21;:::i;:::-;765:3;758:34;689:109;;:::o;804:210::-;891:4;929:2;918:9;914:18;906:26;;942:65;1004:1;993:9;989:17;980:6;942:65;:::i;:::-;804:210;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.5.0 <0.9.0;\r\n\r\ncontract Ownable {\r\n    // Variable that maintains\r\n    // manager address\r\n    address private _manager;\r\n\r\n    // Sets the original manager of\r\n    // contract when it is deployed\r\n    constructor() {\r\n        _manager = msg.sender;\r\n    }\r\n\r\n    // Publicly exposes who is the\r\n    // manager of this contract\r\n    function manager() public view returns (address) {\r\n        return _manager;\r\n    }\r\n\r\n    // onlymanager modifier that validates only\r\n    // if caller of function is contract manager,\r\n    // otherwise not\r\n    modifier onlyManager() {\r\n        require(isManager(), \"Function accessible only by the manager !!\");\r\n        _;\r\n    }\r\n\r\n    // function for managers to verify their managership.\r\n    // Returns true for managers otherwise false\r\n    function isManager() public view returns (bool) {\r\n        return msg.sender == _manager;\r\n    }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\pavan\\Desktop\\crowd\\contracts\\Ownable.sol",
+  "sourcePath": "C:\\Users\\vishw\\Desktop\\crowd\\crowdfund\\crowd\\contracts\\Ownable.sol",
   "ast": {
     "absolutePath": "project:/contracts/Ownable.sol",
     "exportedSymbols": {
@@ -1080,7 +1080,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-02-08T10:26:57.192Z",
+  "updatedAt": "2023-02-13T07:57:52.213Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

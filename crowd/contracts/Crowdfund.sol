@@ -31,7 +31,7 @@ contract CrowdFund is Ownable {
     // Constructor to set the goalAmount to be raised
     constructor() {  }
 
-    //this function helps the users to transfer eth directly to the smartcontract
+    //This function helps the users to transfer eth directly to the smartcontract
     receive() external payable {}
 
     event amountContributed(address sender, uint256 amount);

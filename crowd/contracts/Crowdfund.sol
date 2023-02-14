@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.5.0 <0.9.0;
+pragma solidity 0.8.6;
 import './Ownable.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract CrowdFund is Ownable {
     // Mapping for the contributors of the crowdfund
@@ -8,6 +9,8 @@ contract CrowdFund is Ownable {
     mapping(address => uint256) public contributors;
     // The count of contributors for the project
     uint256 public noOfContributors;
+
+    address public CrowdfundTokenAddress;
 
     // The project structure consisting of different variables in a struct
     // description : The description of the project
@@ -29,9 +32,11 @@ contract CrowdFund is Ownable {
     uint256 public numProjects;
 
     // Constructor to set the goalAmount to be raised
-    constructor() {  }
+    constructor(address _tokenAddress) { 
+        CrowdfundTokenAddress = _tokenAddress;
+     }
 
-    //This function helps the users to transfer eth directly to the smartcontract
+    //his function helps the users to transfer eth directly to the smartcontract
     receive() external payable {}
 
     event amountContributed(address sender, uint256 amount);
@@ -91,7 +96,7 @@ contract CrowdFund is Ownable {
         require(thisProject.raisedAmount >= thisProject.goalAmount);
         require(thisProject.completed == false, "Request has been completed");
         emit madePayment(_projectNo);
-        thisProject.recipient.transfer(thisProject.goalAmount);
+        IERC20(CrowdfundTokenAddress).transferFrom(address(this), thisProject.recipient, thisProject.goalAmount);
         thisProject.completed = true;
     }
 
@@ -105,7 +110,7 @@ contract CrowdFund is Ownable {
         require(contributors[msg.sender] > 0, "You have alredy been refunded");
         address payable user = payable(msg.sender);
         emit refundMade(user, contributors[msg.sender]);
-        user.transfer(contributors[msg.sender]);
+        IERC20(CrowdfundTokenAddress).transferFrom(address(this), msg.sender, contributors[msg.sender]);
         thisProject.raisedAmount -= contributors[msg.sender];
         noOfContributors--;
         contributors[msg.sender] = 0;
